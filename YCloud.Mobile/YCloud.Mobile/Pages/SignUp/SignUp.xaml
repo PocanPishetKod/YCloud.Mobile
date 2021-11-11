@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="YCloud.Mobile.Pages.SignUp.SignUp">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="Center" Spacing="40" Padding="30">
+            <Entry TextColor="White" Keyboard="Email" Placeholder="Enter email"></Entry>
+            <Entry TextColor="White" Placeholder="Enter password" IsPassword="True"></Entry>
+            <Entry TextColor="White" Placeholder="Confirm password" IsPassword="True"></Entry>
+            <Button Text="Sign up" CornerRadius="5" BackgroundColor="#f345a4"></Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

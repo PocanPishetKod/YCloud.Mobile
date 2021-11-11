@@ -1,6 +1,8 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using YCloud.Mobile.Pages.Directory;
+using YCloud.Mobile.Pages.SignIn;
 
 namespace YCloud.Mobile
 {
@@ -10,7 +12,7 @@ namespace YCloud.Mobile
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new NavigationPage(new DirectoryPage());
         }
 
         protected override void OnStart()
