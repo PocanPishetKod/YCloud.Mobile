@@ -1,22 +1,26 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using YCloud.Mobile.Pages.Directory;
+using YCloud.Mobile.Application.ViewModels;
 using YCloud.Mobile.Pages.SignIn;
+using YCloud.Mobile.Pages.SignUp;
 
 namespace YCloud.Mobile
 {
-    public partial class App : Application
+    public partial class App : Xamarin.Forms.Application
     {
-        public App()
+        private readonly ApplicationViewModel _viewModel;
+
+        public App(IServiceProvider serviceProvider)
         {
             InitializeComponent();
-
-            MainPage = new NavigationPage(new DirectoryPage());
+            MainPage = new NavigationPage();
+            _viewModel = serviceProvider.GetService<ApplicationViewModel>();
         }
 
-        protected override void OnStart()
+        protected override async void OnStart()
         {
+            await _viewModel.CheckAuthentication();
         }
 
         protected override void OnSleep()

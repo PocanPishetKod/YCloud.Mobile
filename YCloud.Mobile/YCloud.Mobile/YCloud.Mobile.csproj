@@ -16,13 +16,23 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\YCloud.Mobile.Application\YCloud.Mobile.Application.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Pages\SignUp\SignUpPage.xaml.cs">
+      <DependentUpon>SignUpPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Update="Pages\Directory\DirectoryPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\SignIn\SignInPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\SignUp\SignUp.xaml">
+    <EmbeddedResource Update="Pages\SignUp\SignUpPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

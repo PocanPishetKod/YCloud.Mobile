@@ -84,6 +84,10 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\YCloud.Mobile.Android.Initialization\YCloud.Mobile.Initialization.csproj">
+      <Project>{77b5a402-07b7-4713-ab0b-8cab3948e226}</Project>
+      <Name>YCloud.Mobile.Initialization</Name>
+    </ProjectReference>
     <ProjectReference Include="..\YCloud.Mobile\YCloud.Mobile.csproj">
       <Project>{84B85654-D71F-45AC-8988-1A15E84E33D0}</Project>
       <Name>YCloud.Mobile</Name>

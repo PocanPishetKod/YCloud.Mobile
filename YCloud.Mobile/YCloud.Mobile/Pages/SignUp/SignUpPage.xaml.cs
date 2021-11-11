@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using YCloud.Mobile.Application.ViewModels;
 
 namespace YCloud.Mobile.Pages.SignUp
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SignUp : ContentPage
+    public partial class SignUpPage : ContentPage
     {
-        public SignUp()
+        public SignUpPage(SignUpViewModel viewModel)
         {
             InitializeComponent();
         }
