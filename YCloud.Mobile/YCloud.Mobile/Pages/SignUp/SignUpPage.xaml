@@ -7,7 +7,7 @@
             <Entry TextColor="White" Keyboard="Email" Placeholder="Enter email"></Entry>
             <Entry TextColor="White" Placeholder="Enter password" IsPassword="True"></Entry>
             <Entry TextColor="White" Placeholder="Confirm password" IsPassword="True"></Entry>
-            <Button Text="Sign up" CornerRadius="5" BackgroundColor="#f345a4"></Button>
+            <Button Clicked="OnSignUpButtonClicked" Text="Sign up" CornerRadius="5" BackgroundColor="#f345a4"></Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

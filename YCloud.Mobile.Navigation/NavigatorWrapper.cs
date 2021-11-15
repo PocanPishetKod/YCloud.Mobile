@@ -6,7 +6,7 @@ using Xamarin.Forms;
 
 namespace YCloud.Mobile.Navigation
 {
-    internal class NavigatorWrapper
+    public class NavigatorWrapper
     {
         private readonly NavigationPage _navigationPage;
 

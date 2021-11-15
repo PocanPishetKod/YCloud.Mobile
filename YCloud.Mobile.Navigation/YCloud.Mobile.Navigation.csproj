@@ -5,13 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2196" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\YCloud.Mobile.Application\YCloud.Mobile.Application.csproj" />
-    <ProjectReference Include="..\YCloud.Mobile.Authentication\YCloud.Mobile.Authentication.csproj" />
-    <ProjectReference Include="..\YCloud.Mobile.Navigation\YCloud.Mobile.Navigation.csproj" />
     <ProjectReference Include="..\YCloud.Mobile\YCloud.Mobile\YCloud.Mobile.csproj" />
   </ItemGroup>
 

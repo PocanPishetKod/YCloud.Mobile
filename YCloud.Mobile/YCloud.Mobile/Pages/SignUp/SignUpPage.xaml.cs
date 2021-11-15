@@ -13,9 +13,17 @@ namespace YCloud.Mobile.Pages.SignUp
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SignUpPage : ContentPage
     {
+        private readonly SignUpViewModel _viewModel;
+
         public SignUpPage(SignUpViewModel viewModel)
         {
             InitializeComponent();
+            _viewModel = viewModel;
+        }
+
+        public async void OnSignUpButtonClicked(object sender, EventArgs e)
+        {
+            await _viewModel.SignUp();
         }
     }
 }

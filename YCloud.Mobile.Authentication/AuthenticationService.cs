@@ -11,17 +11,17 @@ namespace YCloud.Mobile.Authentication
     {
         public Task<bool> IsAuthenticated()
         {
-            return Task.FromResult(false);
+            return Task.FromResult(true);
         }
 
         public Task<UserModel> SignIn(string email, string password)
         {
-            throw new NotImplementedException();
+            return Task.FromResult(new UserModel() { Email = email, Id = "qwerty" });
         }
 
         public Task<UserModel> SignUp(string email, string password)
         {
-            throw new NotImplementedException();
+            return Task.FromResult(new UserModel() { Email = email, Id = "qwerty" });
         }
     }
 }

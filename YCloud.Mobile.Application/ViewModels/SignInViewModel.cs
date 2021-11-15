@@ -10,13 +10,14 @@ namespace YCloud.Mobile.Application.ViewModels
     public class SignInViewModel : ViewModelBase
     {
         private readonly IAuthenticationService _authenticationService;
+        private readonly INavigationService _navigationService;
 
         public SignInModel SignInModel { get; }
 
         public SignInViewModel(INavigationService navigationService, IAuthenticationService authenticationService)
-            : base(navigationService)
         {
             _authenticationService = authenticationService;
+            _navigationService = navigationService;
             SignInModel = new SignInModel();
         }
 

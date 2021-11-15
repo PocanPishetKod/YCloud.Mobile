@@ -8,8 +8,14 @@ namespace YCloud.Mobile.Application.Interfaces
 {
     public interface INavigationService
     {
-        Task Navigate<T>() where T : ViewModelBase;
+        Task Navigate<TViewModel>() where TViewModel : ViewModelBase;
+
+        Task Navigate<TViewModel, TNavigationParameters>(TNavigationParameters parameters) 
+            where TViewModel : ViewModelBase where TNavigationParameters : class;
 
         Task NavigateToRoot();
+
+        Task NavigatieRoot<TNavigationParameters>(TNavigationParameters parameters)
+            where TNavigationParameters : class;
     }
 }

@@ -11,9 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YCloud.Mobile", "YCloud.Mob
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YCloud.Mobile.Application", "YCloud.Mobile.Application\YCloud.Mobile.Application.csproj", "{BBD43246-F8D2-4A0A-994C-C1F7190E2116}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YCloud.Mobile.Initialization", "YCloud.Mobile.Android.Initialization\YCloud.Mobile.Initialization.csproj", "{77B5A402-07B7-4713-AB0B-8CAB3948E226}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YCloud.Mobile.Initialization", "YCloud.Mobile.Android.Initialization\YCloud.Mobile.Initialization.csproj", "{77B5A402-07B7-4713-AB0B-8CAB3948E226}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YCloud.Mobile.Authentication", "YCloud.Mobile.Authentication\YCloud.Mobile.Authentication.csproj", "{03351163-ACF8-4378-84B0-F2479E44AE46}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YCloud.Mobile.Authentication", "YCloud.Mobile.Authentication\YCloud.Mobile.Authentication.csproj", "{03351163-ACF8-4378-84B0-F2479E44AE46}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YCloud.Mobile.Navigation", "YCloud.Mobile.Navigation\YCloud.Mobile.Navigation.csproj", "{B2D343F9-7747-4DB1-A241-C9B3CAC39C24}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -115,6 +117,18 @@ Global
 		{03351163-ACF8-4378-84B0-F2479E44AE46}.Release|iPhone.Build.0 = Release|Any CPU
 		{03351163-ACF8-4378-84B0-F2479E44AE46}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{03351163-ACF8-4378-84B0-F2479E44AE46}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{B2D343F9-7747-4DB1-A241-C9B3CAC39C24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2D343F9-7747-4DB1-A241-C9B3CAC39C24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2D343F9-7747-4DB1-A241-C9B3CAC39C24}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{B2D343F9-7747-4DB1-A241-C9B3CAC39C24}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{B2D343F9-7747-4DB1-A241-C9B3CAC39C24}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{B2D343F9-7747-4DB1-A241-C9B3CAC39C24}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{B2D343F9-7747-4DB1-A241-C9B3CAC39C24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2D343F9-7747-4DB1-A241-C9B3CAC39C24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2D343F9-7747-4DB1-A241-C9B3CAC39C24}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{B2D343F9-7747-4DB1-A241-C9B3CAC39C24}.Release|iPhone.Build.0 = Release|Any CPU
+		{B2D343F9-7747-4DB1-A241-C9B3CAC39C24}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{B2D343F9-7747-4DB1-A241-C9B3CAC39C24}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

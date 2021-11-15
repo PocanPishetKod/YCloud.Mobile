@@ -9,19 +9,20 @@ namespace YCloud.Mobile.Application.ViewModels
     public class ApplicationViewModel : ViewModelBase
     {
         private readonly IAuthenticationService _authenticationService;
+        private readonly INavigationService _navigationService;
 
         public ApplicationViewModel(INavigationService navigationService, IAuthenticationService authenticationService)
-            : base(navigationService)
         {
             _authenticationService = authenticationService;
+            _navigationService = navigationService;
         }
 
         public async Task CheckAuthentication()
         {
             if (await _authenticationService.IsAuthenticated())
-                await Navigate<DirectoryViewModel>();
+                await _navigationService.Navigate<DirectoryViewModel>();
             else
-                await Navigate<SignInViewModel>();
+                await _navigationService.Navigate<SignInViewModel>();
         }
     }
 }

@@ -8,16 +8,25 @@ namespace YCloud.Mobile.Application.ViewModels
 {
     public class ViewModelBase
     {
-        protected readonly INavigationService _navigationService;
+        private object _navigationParameters;
 
-        public ViewModelBase(INavigationService navigationService)
+        public void SetNavigationParameters(object parameters)
         {
-            _navigationService = navigationService;
+            if (parameters == null)
+                throw new ArgumentNullException(nameof(parameters));
+
+            if (_navigationParameters != null)
+                throw new InvalidOperationException("Navigation parameters already set");
+
+            _navigationParameters = parameters;
         }
 
-        protected async Task Navigate<T>() where T : ViewModelBase
+        protected T GetNavigationParameters<T>() where T : class
         {
-            await _navigationService.Navigate<T>();
+            if (!(_navigationParameters is T))
+                throw new InvalidCastException("Invalid cast to expected type");
+
+            return (T)_navigationParameters;
         }
     }
 }

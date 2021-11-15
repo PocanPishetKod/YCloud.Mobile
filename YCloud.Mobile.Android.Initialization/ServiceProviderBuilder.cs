@@ -6,6 +6,7 @@ using YCloud.Mobile.Application.Interfaces;
 using YCloud.Mobile.Application.ViewModels;
 using YCloud.Mobile.Authentication;
 using YCloud.Mobile.Navigation;
+using YCloud.Mobile.Navigation.NavigationAlgorithms;
 
 namespace YCloud.Mobile.Initialization
 {
@@ -32,6 +33,7 @@ namespace YCloud.Mobile.Initialization
         {
             services.AddSingleton<INavigationService, NavigationService>();
             services.AddSingleton<IAuthenticationService, AuthenticationService>();
+            services.AddSingleton<INavigationAlgorithmFactory, NavigarionAlgorithmFactory>();
         }
     }
 }
