@@ -11,6 +11,7 @@
   <ItemGroup>
     <ProjectReference Include="..\YCloud.Mobile.Application\YCloud.Mobile.Application.csproj" />
     <ProjectReference Include="..\YCloud.Mobile.Authentication\YCloud.Mobile.Authentication.csproj" />
+    <ProjectReference Include="..\YCloud.Mobile.Data\YCloud.Mobile.Data.csproj" />
     <ProjectReference Include="..\YCloud.Mobile.Navigation\YCloud.Mobile.Navigation.csproj" />
     <ProjectReference Include="..\YCloud.Mobile\YCloud.Mobile\YCloud.Mobile.csproj" />
   </ItemGroup>

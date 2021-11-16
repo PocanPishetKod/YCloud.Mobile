@@ -5,6 +5,7 @@ using System.Text;
 using YCloud.Mobile.Application.Interfaces;
 using YCloud.Mobile.Application.ViewModels;
 using YCloud.Mobile.Authentication;
+using YCloud.Mobile.Data.Repositories;
 using YCloud.Mobile.Navigation;
 using YCloud.Mobile.Navigation.NavigationAlgorithms;
 
@@ -34,6 +35,8 @@ namespace YCloud.Mobile.Initialization
             services.AddSingleton<INavigationService, NavigationService>();
             services.AddSingleton<IAuthenticationService, AuthenticationService>();
             services.AddSingleton<INavigationAlgorithmFactory, NavigarionAlgorithmFactory>();
+            services.AddSingleton<IDirectoryRepository, DirectoryRepository>();
+            services.AddSingleton<IDriveRepository, DriveRepository>();
         }
     }
 }

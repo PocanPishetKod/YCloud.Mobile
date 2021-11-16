@@ -25,5 +25,10 @@ namespace YCloud.Mobile.Pages.SignUp
         {
             await _viewModel.SignUp();
         }
+
+        public async void OnSignInButtonClicked(object sender, EventArgs e)
+        {
+            await _viewModel.GoToSignIn();
+        }
     }
 }

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace YCloud.Mobile.Application.Models
+namespace YCloud.Mobile.Application.Dto
 {
-    public class UserModel
+    public class UserDto
     {
         public string Id { get; set; }
 

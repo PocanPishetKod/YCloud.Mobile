@@ -23,6 +23,9 @@ namespace YCloud.Mobile.Application.ViewModels
 
         protected T GetNavigationParameters<T>() where T : class
         {
+            if (_navigationParameters == null)
+                return null;
+
             if (!(_navigationParameters is T))
                 throw new InvalidCastException("Invalid cast to expected type");
 

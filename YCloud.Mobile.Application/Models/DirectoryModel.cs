@@ -1,19 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using YCloud.Mobile.Application.Dto;
 
 namespace YCloud.Mobile.Application.Models
 {
-    public class DirectoryModel
+    public class DirectoryModel : FileSystemElementModel
     {
-        public string Id { get; set; }
+        public string ParentDirectoryId { get; }
 
-        public string ParentDirectoryId { get; set; }
+        public override string IconUri => "directory.png";
 
-        public long Size { get; set; }
+        private DirectoryModel(string id, string name, long size, string parentDirectoryId)
+            : base(id, name, size)
+        {
+            ParentDirectoryId = parentDirectoryId;
+        }
 
-        public ICollection<DirectoryModel> Directories { get; set; }
-
-        public ICollection<FileModel> Files { get; set; }
+        public static DirectoryModel Create(DirectoryDto directoryDto)
+        {
+            return new DirectoryModel(directoryDto.Id, directoryDto.Name, directoryDto.Size, directoryDto.ParentDirectoryId);
+        }
     }
 }

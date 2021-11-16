@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using YCloud.Mobile.Application.Models;
 using YCloud.Mobile.Application.ViewModels;
 
 namespace YCloud.Mobile.Pages.Directory
@@ -20,11 +21,17 @@ namespace YCloud.Mobile.Pages.Directory
             InitializeComponent();
             _viewModel = viewModel;
             BindingContext = _viewModel;
+        }
 
-            directoryItems.ItemsSource = new List<string>()
-            {
-                "asdsad", "asdsad","asdsad","asdsad","asdsad","asdsad","asdsad","asdsad","asdsad","asdsad","asdsad","asdsad","asdsad","asdsad", "asdsad","asdsad","asdsad","asdsad","asdsad","asdsad","asdsad","asdsad","asdsad","asdsad","asdsad","asdsad"
-            };
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+            await _viewModel.OnLoad();
+        }
+
+        private async void OnItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            await _viewModel.OnDirectoryItemTapped(e.Item as FileSystemElementModel);
         }
     }
 }
