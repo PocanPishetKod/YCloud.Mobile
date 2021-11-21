@@ -50,6 +50,23 @@ namespace YCloud.Mobile.Pages.Directory
                 if (selectedFiles.Any())
                     await _viewModel.UploadFiles(selectedFiles.Select(f => new SelectedFile(f)).ToList());
             }
+            else if (selectedAction.Equals(createDirectory))
+            {
+                var directoryName = await ShowInputDirectoryNameDialog();
+                if (string.IsNullOrWhiteSpace(directoryName))
+                {
+                    await DisplayAlert("Ошибка", "Имя папки не должно быть пустым", "Ok");
+                }
+                else
+                {
+                    await _viewModel.CreateDirectory(directoryName);
+                }
+            }
+        }
+
+        private async Task<string> ShowInputDirectoryNameDialog()
+        {
+            return await DisplayPromptAsync("Создание папки", string.Empty);
         }
     }
 }

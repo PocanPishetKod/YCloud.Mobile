@@ -9,5 +9,7 @@ namespace YCloud.Mobile.Application.Interfaces
     public interface IDirectoryRepository
     {
         Task<DirectoryDto> GetDirectory(string id);
+
+        Task<DirectoryDto> Create(string directoryName, string parentDirectoryId, string driveId);
     }
 }

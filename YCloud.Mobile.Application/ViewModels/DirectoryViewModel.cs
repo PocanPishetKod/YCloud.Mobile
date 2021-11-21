@@ -69,7 +69,8 @@ namespace YCloud.Mobile.Application.ViewModels
 
         public async Task CreateDirectory(string name)
         {
-
+            var createdDirectory = await _directoryRepository.Create(name, _directoryDto.Id, _driveDto.Id);
+            DirectoryItems.Add(DirectoryModel.Create(createdDirectory));
         }
 
         public async Task UploadFiles(IReadOnlyCollection<ISelectedFile> selectedFiles)
