@@ -37,6 +37,7 @@ namespace YCloud.Mobile.Initialization
             services.AddSingleton<INavigationAlgorithmFactory, NavigarionAlgorithmFactory>();
             services.AddSingleton<IDirectoryRepository, DirectoryRepository>();
             services.AddSingleton<IDriveRepository, DriveRepository>();
+            services.AddSingleton<IFileRepository, FileRepository>();
         }
     }
 }

@@ -17,20 +17,32 @@ namespace YCloud.Mobile.Application.ViewModels
         private readonly IDirectoryRepository _directoryRepository;
         private readonly IAuthenticationService _authenticationService;
         private readonly IDriveRepository _driveRepository;
+        private readonly IFileRepository _fileRepository;
 
-        private DirectoryDto _directory;
-        private DriveDto _drive;
+        private DirectoryDto _directoryDto;
+        private DriveDto _driveDto;
+        private DriveModel _drive;
 
         public ObservableCollection<FileSystemElementModel> DirectoryItems { get; private set; }
-        public DriveModel Drive { get; private set; }
+
+        public DriveModel Drive 
+        {
+            get => _drive;
+            private set
+            {
+                _drive = value;
+                NotifyPropertyChanged(nameof(Drive));
+            }
+        }
 
         public DirectoryViewModel(INavigationService navigationService, IDirectoryRepository directoryRepository,
-            IAuthenticationService authenticationService, IDriveRepository driveRepository)
+            IAuthenticationService authenticationService, IDriveRepository driveRepository, IFileRepository fileRepository)
         {
             _navigationService = navigationService;
             _directoryRepository = directoryRepository;
             _authenticationService = authenticationService;
             _driveRepository = driveRepository;
+            _fileRepository = fileRepository;
             DirectoryItems = new ObservableCollection<FileSystemElementModel>();
         }
 
@@ -55,6 +67,25 @@ namespace YCloud.Mobile.Application.ViewModels
                 .Navigate<DirectoryViewModel, DirectoryViewModelParameters>(new DirectoryViewModelParameters(directory.Id));
         }
 
+        public async Task CreateDirectory(string name)
+        {
+
+        }
+
+        public async Task UploadFiles(IReadOnlyCollection<ISelectedFile> selectedFiles)
+        {
+            if (selectedFiles.Count == 0)
+                return;
+
+            var uploadedFiles = await _fileRepository.UploadFiles(selectedFiles, _directoryDto.Id, _driveDto.Id);
+            foreach (var file in uploadedFiles)
+            {
+                DirectoryItems.Add(FileModel.Create(file));
+            }
+
+            await LoadDrive();
+        }
+
         private Task OpenFile(FileModel file)
         {
             return Task.CompletedTask;
@@ -64,9 +95,9 @@ namespace YCloud.Mobile.Application.ViewModels
         {
             DirectoryItems.Clear();
 
-            var items = _directory.Directories
+            var items = _directoryDto.Directories
                 .Select<DirectoryDto, FileSystemElementModel>(d => DirectoryModel.Create(d))
-                .Union(_directory.Files.Select(f => FileModel.Create(f)));
+                .Union(_directoryDto.Files.Select(f => FileModel.Create(f)));
 
             foreach (var item in items)
             {
@@ -81,7 +112,7 @@ namespace YCloud.Mobile.Application.ViewModels
             if (loadedDirectory == null)
                 throw new NullReferenceException(nameof(loadedDirectory));
 
-            _directory = loadedDirectory;
+            _directoryDto = loadedDirectory;
         }
 
         private async Task<DirectoryDto> LoadDirectory(DirectoryViewModelParameters viewModelParameters)
@@ -89,7 +120,7 @@ namespace YCloud.Mobile.Application.ViewModels
             if (viewModelParameters != null)
                 return await _directoryRepository.GetDirectory(viewModelParameters.DirectoryId);
 
-            return await _directoryRepository.GetDirectory(_drive.RootDirectoryId);
+            return await _directoryRepository.GetDirectory(_driveDto.RootDirectoryId);
         }
 
         private async Task LoadDrive()
@@ -102,7 +133,7 @@ namespace YCloud.Mobile.Application.ViewModels
             if (loadedDrive == null)
                 throw new NullReferenceException($"Invalid load drive by userId = {user.Id}");
 
-            _drive = loadedDrive;
+            _driveDto = loadedDrive;
             Drive = DriveModel.Create(loadedDrive);
         }
     }

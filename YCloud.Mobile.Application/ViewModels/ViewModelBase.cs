@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using System.Threading.Tasks;
 using YCloud.Mobile.Application.Interfaces;
 
 namespace YCloud.Mobile.Application.ViewModels
 {
-    public class ViewModelBase
+    public abstract class ViewModelBase : INotifyPropertyChanged
     {
         private object _navigationParameters;
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public void SetNavigationParameters(object parameters)
         {
@@ -30,6 +33,11 @@ namespace YCloud.Mobile.Application.ViewModels
                 throw new InvalidCastException("Invalid cast to expected type");
 
             return (T)_navigationParameters;
+        }
+
+        protected void NotifyPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
