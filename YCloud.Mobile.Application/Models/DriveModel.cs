@@ -5,7 +5,7 @@ using YCloud.Mobile.Application.Dto;
 
 namespace YCloud.Mobile.Application.Models
 {
-    public class DriveModel
+    public class DriveModel : ModelBase
     {
         public string Id { get; }
 

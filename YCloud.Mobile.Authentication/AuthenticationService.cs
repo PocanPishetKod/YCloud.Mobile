@@ -4,7 +4,6 @@ using System.Text;
 using System.Threading.Tasks;
 using YCloud.Mobile.Application.Dto;
 using YCloud.Mobile.Application.Interfaces;
-using YCloud.Mobile.Application.Models;
 
 namespace YCloud.Mobile.Authentication
 {

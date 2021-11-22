@@ -47,12 +47,15 @@ namespace YCloud.Mobile.Pages.Directory
             if (selectedAction.Equals(loadFile))
             {
                 var selectedFiles = await FilePicker.PickMultipleAsync();
-                if (selectedFiles.Any())
+                if (selectedFiles?.Any() ?? false)
                     await _viewModel.UploadFiles(selectedFiles.Select(f => new SelectedFile(f)).ToList());
             }
             else if (selectedAction.Equals(createDirectory))
             {
                 var directoryName = await ShowInputDirectoryNameDialog();
+                if (directoryName == null)
+                    return;
+
                 if (string.IsNullOrWhiteSpace(directoryName))
                 {
                     await DisplayAlert("Ошибка", "Имя папки не должно быть пустым", "Ok");
@@ -67,6 +70,11 @@ namespace YCloud.Mobile.Pages.Directory
         private async Task<string> ShowInputDirectoryNameDialog()
         {
             return await DisplayPromptAsync("Создание папки", string.Empty);
+        }
+
+        private async void RefreshingItems(object sender, EventArgs e)
+        {
+            await _viewModel.OnRefresh();
         }
     }
 }

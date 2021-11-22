@@ -28,6 +28,7 @@ namespace YCloud.Mobile.Initialization
             services.AddTransient<DirectoryViewModel>();
             services.AddTransient<SignInViewModel>();
             services.AddTransient<SignUpViewModel>();
+            services.AddTransient<ImagesViewModel>();
         }
 
         private void AddServices(ServiceCollection services)

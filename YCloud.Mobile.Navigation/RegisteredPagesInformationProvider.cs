@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using YCloud.Mobile.Application.ViewModels;
 using YCloud.Mobile.Pages.Directory;
+using YCloud.Mobile.Pages.Image;
 using YCloud.Mobile.Pages.SignIn;
 using YCloud.Mobile.Pages.SignUp;
 
@@ -18,7 +19,8 @@ namespace YCloud.Mobile.Navigation
         {
             _pageTypes = new Dictionary<Type, Type>()
             {
-                { typeof(DirectoryViewModel), typeof(DirectoryPage) }
+                { typeof(DirectoryViewModel), typeof(DirectoryPage) },
+                { typeof(ImagesViewModel), typeof(ImagesPage) }
             };
 
             _modalPageTypes = new Dictionary<Type, Type>()

@@ -5,6 +5,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="itachi_1.jpg" />
+    <None Remove="itachi_1.png" />
+    <None Remove="itachi_2.jpg" />
+    <None Remove="itachi_2.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="itachi_1.jpg" />
+    <EmbeddedResource Include="itachi_1.png" />
+    <EmbeddedResource Include="itachi_2.jpg" />
+    <EmbeddedResource Include="itachi_2.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\YCloud.Mobile.Application\YCloud.Mobile.Application.csproj" />
   </ItemGroup>
 

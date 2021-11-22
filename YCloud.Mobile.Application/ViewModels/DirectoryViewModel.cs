@@ -87,9 +87,20 @@ namespace YCloud.Mobile.Application.ViewModels
             await LoadDrive();
         }
 
-        private Task OpenFile(FileModel file)
+        public async Task OnRefresh()
         {
-            return Task.CompletedTask;
+            await LoadDirectory();
+            FillDirectoryItems();
+        }
+
+        private async Task OpenFile(FileModel file)
+        {
+            var imageFiles = DirectoryItems.OfType<FileModel>()
+                .Where(f => f.IsImage)
+                .ToList();
+
+            await _navigationService
+                .Navigate<ImagesViewModel, ImagesNavigationParameters>(new ImagesNavigationParameters(imageFiles, file));
         }
 
         private void FillDirectoryItems()

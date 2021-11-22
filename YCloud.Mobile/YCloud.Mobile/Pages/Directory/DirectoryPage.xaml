@@ -22,7 +22,9 @@
             </StackLayout>
             <BoxView HeightRequest="1" BackgroundColor="Gray" Margin="0"></BoxView>
             <ListView x:Name="directoryItems" RowHeight="55" HasUnevenRows="False"
-                      SelectionMode="None" IsPullToRefreshEnabled="True" ItemTapped="OnItemTapped" ItemsSource="{Binding DirectoryItems}">
+                      SelectionMode="None" IsPullToRefreshEnabled="True"
+                      ItemTapped="OnItemTapped" ItemsSource="{Binding DirectoryItems}"
+                      Refreshing="RefreshingItems">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>

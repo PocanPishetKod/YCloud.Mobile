@@ -4,7 +4,7 @@ using System.Text;
 
 namespace YCloud.Mobile.Application.Models
 {
-    public abstract class FileSystemElementModel
+    public abstract class FileSystemElementModel : ModelBase
     {
         public string Id { get; }
 

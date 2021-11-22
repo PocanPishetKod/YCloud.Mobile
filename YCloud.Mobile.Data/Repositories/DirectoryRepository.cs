@@ -53,35 +53,35 @@ namespace YCloud.Mobile.Data.Repositories
                     new FileDto()
                     {
                         Id = "Id",
-                        Name = "File",
+                        Name = "File.jpg",
                         DirectoryId = id,
                         Size = 1024
                     },
                     new FileDto()
                     {
                         Id = "Id",
-                        Name = "File",
+                        Name = "File.jpg",
                         DirectoryId = id,
                         Size = 1024
                     },
                     new FileDto()
                     {
                         Id = "Id",
-                        Name = "File",
+                        Name = "File.jpg",
                         DirectoryId = id,
                         Size = 1024
                     },
                     new FileDto()
                     {
                         Id = "Id",
-                        Name = "File",
+                        Name = "File.jpg",
                         DirectoryId = id,
                         Size = 1024
                     },
                     new FileDto()
                     {
                         Id = "Id",
-                        Name = "File",
+                        Name = "File.jpg",
                         DirectoryId = id,
                         Size = 1024
                     }

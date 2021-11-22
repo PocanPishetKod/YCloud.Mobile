@@ -4,7 +4,7 @@ using System.Text;
 
 namespace YCloud.Mobile.Application.Models
 {
-    public class SignInModel
+    public class SignInModel : ModelBase
     {
         public string Email { get; set; }
 
