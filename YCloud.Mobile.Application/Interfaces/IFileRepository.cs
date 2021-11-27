@@ -12,5 +12,7 @@ namespace YCloud.Mobile.Application.Interfaces
         Task<IReadOnlyCollection<FileDto>> UploadFiles(IReadOnlyCollection<ISelectedFile> selectedFiles, string directoryId, string driveId);
 
         Task<Stream> DownloadFile(string fileId);
+
+        Task Delete(string Id);
     }
 }

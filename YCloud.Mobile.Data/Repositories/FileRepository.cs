@@ -47,5 +47,10 @@ namespace YCloud.Mobile.Data.Repositories
             var assembly = IntrospectionExtensions.GetTypeInfo(typeof(FileRepository)).Assembly;
             return assembly.GetManifestResourceStream($"YCloud.Mobile.Data.{fileName}");
         }
+
+        public Task Delete(string Id)
+        {
+            return Task.CompletedTask;
+        }
     }
 }

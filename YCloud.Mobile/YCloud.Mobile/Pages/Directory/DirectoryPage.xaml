@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:valueconverters="clr-namespace:YCloud.Mobile.ValueConverters"
-             x:Class="YCloud.Mobile.Pages.Directory.DirectoryPage">
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:valueconverters="clr-namespace:YCloud.Mobile.ValueConverters" xmlns:gesturerecognizers="clr-namespace:YCloud.Mobile.GestureRecognizers"
+             x:Class="YCloud.Mobile.Pages.Directory.DirectoryPage"
+             x:Name="DirectoryPageRef">
     <ContentPage.Resources>
         <ResourceDictionary>
             <valueconverters:DriveModelToDriveSpaceInfoConverter x:Key="DriveModelToDriveSpaceInfoConverter" />
@@ -35,6 +36,11 @@
                                         <Label Text="{Binding Name}" FontSize="15" VerticalTextAlignment="Center" TextColor="White"></Label>
                                         <Label Text="6 objects  |  19.04.2021 10:58" FontSize="10"></Label>
                                     </StackLayout>
+                                    <Image Source="menuVertical.png" HeightRequest="20" HorizontalOptions="EndAndExpand">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding ItemMenuTapCommand, Source={x:Reference DirectoryPageRef}}" CommandParameter="{Binding .}"></TapGestureRecognizer>
+                                        </Image.GestureRecognizers>
+                                    </Image>
                                     <Label Text=">" FontSize="15" HorizontalOptions="EndAndExpand" VerticalTextAlignment="Center"></Label>
                                 </StackLayout>
                             </ViewCell.View>

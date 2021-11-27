@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -16,6 +18,8 @@ namespace YCloud.Mobile.Pages.Directory
     public partial class DirectoryPage : ContentPage
     {
         private readonly DirectoryViewModel _viewModel;
+
+        public ICommand ItemMenuTapCommand => new Command((parameter) => OnItemMenuTapped(parameter));
 
         public DirectoryPage(DirectoryViewModel viewModel)
         {
@@ -67,6 +71,33 @@ namespace YCloud.Mobile.Pages.Directory
             }
         }
 
+        private async void OnItemMenuTapped(object parameter)
+        {
+            const string delete = "Удалить";
+
+            var fileSystemElement = parameter as FileSystemElementModel;
+            var selectedAction = await DisplayActionSheet("Меню", "Отмена", null, delete);
+
+            if (selectedAction == null)
+                return;
+
+            if (selectedAction.Equals(delete))
+            {
+                var deleteAccepted = await DisplayAlert("Подтверждение", "Вы действительно произвести удаление?", "Да", "Нет");
+                if (!deleteAccepted)
+                    return;
+
+                if (fileSystemElement is FileModel fileModel)
+                {
+                    await _viewModel.DeleteFile(fileModel);
+                }
+                else if (fileSystemElement is DirectoryModel directoryModel)
+                {
+                    await _viewModel.DeleteDirectory(directoryModel);
+                }
+            }
+        }
+
         private async Task<string> ShowInputDirectoryNameDialog()
         {
             return await DisplayPromptAsync("Создание папки", string.Empty);
@@ -75,6 +106,12 @@ namespace YCloud.Mobile.Pages.Directory
         private async void RefreshingItems(object sender, EventArgs e)
         {
             await _viewModel.OnRefresh();
+            directoryItems.EndRefresh();
+        }
+
+        private void LongPressEffect_LongPressed(object sender, EventArgs e)
+        {
+            Console.WriteLine("Long pressed");
         }
     }
 }

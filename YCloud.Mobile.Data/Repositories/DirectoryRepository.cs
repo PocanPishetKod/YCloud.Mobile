@@ -103,5 +103,10 @@ namespace YCloud.Mobile.Data.Repositories
                 Size = 0
             });
         }
+
+        public Task Delete(string id)
+        {
+            return Task.CompletedTask;
+        }
     }
 }

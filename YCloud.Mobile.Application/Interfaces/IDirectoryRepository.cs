@@ -11,5 +11,7 @@ namespace YCloud.Mobile.Application.Interfaces
         Task<DirectoryDto> GetDirectory(string id);
 
         Task<DirectoryDto> Create(string directoryName, string parentDirectoryId, string driveId);
+
+        Task Delete(string id);
     }
 }

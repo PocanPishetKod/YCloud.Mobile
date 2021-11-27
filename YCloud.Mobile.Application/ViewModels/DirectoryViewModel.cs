@@ -93,6 +93,18 @@ namespace YCloud.Mobile.Application.ViewModels
             FillDirectoryItems();
         }
 
+        public async Task DeleteDirectory(DirectoryModel directoryModel)
+        {
+            await _directoryRepository.Delete(directoryModel.Id);
+            DirectoryItems.Remove(directoryModel);
+        }
+
+        public async Task DeleteFile(FileModel fileModel)
+        {
+            await _fileRepository.Delete(fileModel.Id);
+            DirectoryItems.Remove(fileModel);
+        }
+
         private async Task OpenFile(FileModel file)
         {
             var imageFiles = DirectoryItems.OfType<FileModel>()
