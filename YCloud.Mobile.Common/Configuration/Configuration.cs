@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using Microsoft.Extensions.Configuration;
 
@@ -45,9 +46,22 @@ namespace YCloud.Mobile.Common.Configuration
 
         private void BuildConfiguration()
         {
+            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+            var assembly = assemblies
+                .FirstOrDefault(a => a.GetName().Name.EndsWith("Android") || a.GetName().Name.EndsWith("IOS"));
+
+            if (assembly == null)
+                throw new InvalidOperationException("Main assembly not found");
+
+            var resourceName = assembly
+                .GetManifestResourceNames()
+                .FirstOrDefault(r => r.EndsWith("appsettings.json"));
+
+            if (resourceName == null)
+                throw new InvalidOperationException("appsettings.json not found");
+
             _configuration = new ConfigurationBuilder()
-                .SetBasePath(Environment.CurrentDirectory)
-                .AddJsonFile("appsettings.json")
+                .AddJsonStream(assembly.GetManifestResourceStream(resourceName))
                 .Build();
         }
     }
