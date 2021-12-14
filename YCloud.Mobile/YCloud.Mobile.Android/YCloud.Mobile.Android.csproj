@@ -94,6 +94,10 @@
       <Project>{77b5a402-07b7-4713-ab0b-8cab3948e226}</Project>
       <Name>YCloud.Mobile.Initialization</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\YCloud.Mobile.Common\YCloud.Mobile.Common.csproj">
+      <Project>{7363da8a-0be9-4f0e-8cd2-b258374e9834}</Project>
+      <Name>YCloud.Mobile.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\YCloud.Mobile\YCloud.Mobile.csproj">
       <Project>{84B85654-D71F-45AC-8988-1A15E84E33D0}</Project>
       <Name>YCloud.Mobile</Name>
@@ -107,6 +111,11 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\file_48x48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
