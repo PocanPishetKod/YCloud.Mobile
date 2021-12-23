@@ -19,6 +19,7 @@ namespace YCloud.Mobile.Pages.SignUp
         {
             InitializeComponent();
             _viewModel = viewModel;
+            BindingContext = _viewModel;
         }
 
         public async void OnSignUpButtonClicked(object sender, EventArgs e)

@@ -20,8 +20,8 @@
 
   <ItemGroup>
     <PackageReference Include="Utf8Json" Version="1.3.7" />
-    <PackageReference Include="YAuth.Client" Version="1.0.2" />
-    <PackageReference Include="YCloud.Client" Version="1.0.0" />
+    <PackageReference Include="YAuth.Client" Version="1.0.3" />
+    <PackageReference Include="YCloud.Client" Version="1.0.2" />
     <PackageReference Include="YHome.Client.Common" Version="1.0.0" />
   </ItemGroup>
 

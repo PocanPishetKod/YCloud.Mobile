@@ -12,8 +12,6 @@ namespace YCloud.Mobile.Application.Dto
 
         public long Size { get; set; }
 
-        public string ParentDirectoryId { get; set; }
-
         public ICollection<DirectoryDto> Directories { get; set; }
 
         public ICollection<FileDto> Files { get; set; }

@@ -18,12 +18,19 @@ namespace YCloud.Mobile.Navigation
 
         public NavigationPageInfo Get(Type viewModelType)
         {
-            return PageInfos.FirstOrDefault(p => p.ViewModelType == viewModelType);
+            var targets = PageInfos.Where(p => p.ViewModelType == viewModelType).ToList();
+            if (targets.Count == 0)
+                return null;
+
+            if (targets.Count == 1)
+                return targets[0];
+
+            return targets.OfType<PageInfo>().FirstOrDefault(p => !p.IsRoot);
         }
 
         public NavigationPageInfo GetRoot()
         {
-            return PageInfos.Cast<PageInfo>().FirstOrDefault(p => p.IsRoot);
+            return PageInfos.OfType<PageInfo>().FirstOrDefault(p => p.IsRoot);
         }
     }
 }

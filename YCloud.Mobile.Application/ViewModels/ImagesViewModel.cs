@@ -14,6 +14,7 @@ namespace YCloud.Mobile.Application.ViewModels
     {
         private readonly IFileRepository _fileRepository;
         private FileModel _currentImage;
+        private FileModel _previousImage;
 
         public ObservableCollection<FileModel> Images { get; private set; }
 
@@ -22,6 +23,7 @@ namespace YCloud.Mobile.Application.ViewModels
             get => _currentImage;
             set
             {
+                _previousImage = _currentImage;
                 _currentImage = value;
                 NotifyPropertyChanged(nameof(CurrentImage));
             } 
@@ -39,7 +41,7 @@ namespace YCloud.Mobile.Application.ViewModels
             await FillImages();
         }
 
-        private async Task FillImages()
+        private Task FillImages()
         {
             var navigationParameters = GetNavigationParameters<ImagesNavigationParameters>();
             if (navigationParameters == null)
@@ -53,7 +55,7 @@ namespace YCloud.Mobile.Application.ViewModels
             }
 
             CurrentImage = navigationParameters.CurrentImage;
-            CurrentImage.Data = await DownloadFile(CurrentImage.Id);
+            return Task.CompletedTask;
         }
 
         private async void OnCurrentImageChanged(object sender, PropertyChangedEventArgs e)
@@ -62,6 +64,12 @@ namespace YCloud.Mobile.Application.ViewModels
                 return;
 
             if (CurrentImage == null)
+                return;
+
+            if (_currentImage.Id == _previousImage?.Id)
+                return;
+
+            if (CurrentImage.Data.Length > 0)
                 return;
 
             CurrentImage.Data = await DownloadFile(CurrentImage.Id);

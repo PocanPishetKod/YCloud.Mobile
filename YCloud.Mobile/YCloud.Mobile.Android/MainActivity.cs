@@ -5,6 +5,11 @@ using Android.Content.PM;
 using Android.Runtime;
 using Android.OS;
 using YCloud.Mobile.Initialization;
+using System.Threading.Tasks;
+using System.Net.Http;
+using System.Net;
+using Java.Net;
+using Javax.Net.Ssl;
 
 namespace YCloud.Mobile.Droid
 {
@@ -19,6 +24,17 @@ namespace YCloud.Mobile.Droid
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App(new AndroidServiceProviderBuilder().Build()));
         }
+
+        private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            var ex = e;
+        }
+
+        private void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
+        {
+            var ex = e;
+        }
+
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);

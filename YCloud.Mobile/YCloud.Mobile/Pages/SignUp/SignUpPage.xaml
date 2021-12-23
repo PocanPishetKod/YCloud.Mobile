@@ -4,9 +4,9 @@
              x:Class="YCloud.Mobile.Pages.SignUp.SignUpPage">
     <ContentPage.Content>
         <StackLayout VerticalOptions="Center" Spacing="40" Padding="30">
-            <Entry TextColor="White" Keyboard="Email" Placeholder="Enter email"></Entry>
-            <Entry TextColor="White" Placeholder="Enter password" IsPassword="True"></Entry>
-            <Entry TextColor="White" Placeholder="Confirm password" IsPassword="True"></Entry>
+            <Entry TextColor="White" Keyboard="Email" Placeholder="Enter email" Text="{Binding SignUpModel.Email}"></Entry>
+            <Entry TextColor="White" Placeholder="Enter password" IsPassword="True" Text="{Binding SignUpModel.Password}"></Entry>
+            <Entry TextColor="White" Placeholder="Confirm password" IsPassword="True" Text="{Binding SignUpModel.ConfirmPassword}"></Entry>
             <Button Clicked="OnSignUpButtonClicked" Text="Sign up" CornerRadius="5" BackgroundColor="#f345a4"></Button>
             <BoxView HeightRequest="1" Color="Gray"></BoxView>
             <Button Clicked="OnSignInButtonClicked" Text="Sign in" CornerRadius="5" BackgroundColor="#f345a4"></Button>

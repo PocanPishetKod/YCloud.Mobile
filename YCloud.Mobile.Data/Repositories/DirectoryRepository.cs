@@ -1,112 +1,56 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using YCloud.Client;
 using YCloud.Mobile.Application.Dto;
 using YCloud.Mobile.Application.Interfaces;
+using YCloud.Mobile.Common.Configuration;
+using YCloud.Mobile.Data.Serialization;
+using YCloud.Mobile.Data.Services;
+using YCloudDirectoryDto = YCloud.Client.Dto.DirectoryDto;
 
 namespace YCloud.Mobile.Data.Repositories
 {
     public class DirectoryRepository : IDirectoryRepository
     {
-        public Task<DirectoryDto> GetDirectory(string id)
-        {
-            var result = new DirectoryDto()
-            {
-                Id = id,
-                Name = "Directory",
-                ParentDirectoryId = "ParentId",
-                Size = 1024,
-                Directories = new List<DirectoryDto>()
-                {
-                    new DirectoryDto()
-                    {
-                        Id = "Id",
-                        Name = "Directory",
-                        ParentDirectoryId = id,
-                        Size = 1024
-                    },
-                    new DirectoryDto()
-                    {
-                        Id = "Id",
-                        Name = "Directory",
-                        ParentDirectoryId = id,
-                        Size = 1024
-                    },
-                    new DirectoryDto()
-                    {
-                        Id = "Id",
-                        Name = "Directory",
-                        ParentDirectoryId = id,
-                        Size = 1024
-                    },
-                    new DirectoryDto()
-                    {
-                        Id = "Id",
-                        Name = "Directory",
-                        ParentDirectoryId = id,
-                        Size = 1024
-                    }
-                },
-                Files = new List<FileDto>()
-                {
-                    new FileDto()
-                    {
-                        Id = "Id",
-                        Name = "File.jpg",
-                        DirectoryId = id,
-                        Size = 1024
-                    },
-                    new FileDto()
-                    {
-                        Id = "Id",
-                        Name = "File.jpg",
-                        DirectoryId = id,
-                        Size = 1024
-                    },
-                    new FileDto()
-                    {
-                        Id = "Id",
-                        Name = "File.jpg",
-                        DirectoryId = id,
-                        Size = 1024
-                    },
-                    new FileDto()
-                    {
-                        Id = "Id",
-                        Name = "File.jpg",
-                        DirectoryId = id,
-                        Size = 1024
-                    },
-                    new FileDto()
-                    {
-                        Id = "Id",
-                        Name = "File.jpg",
-                        DirectoryId = id,
-                        Size = 1024
-                    }
-                }
-            };
+        private readonly DirectoriesClient _directoriesClient;
 
-            return Task.FromResult(result);
+        public DirectoryRepository(IReadOnlyAuthenticationState authenticationState, IYCloudConfiguration yCloudConfiguration)
+        {
+            var httpClientHandler = new HttpClientHandler();
+            httpClientHandler.ServerCertificateCustomValidationCallback = (q, w, e, r) => true;
+
+            _directoriesClient = new DirectoriesClient(new JsonSerialization(),
+                yCloudConfiguration.BaseUrl,
+                authenticationState.GetAccessToken(),
+                httpClientHandler);
         }
 
-        public Task<DirectoryDto> Create(string directoryName, string parentDirectoryId, string driveId)
+        public async Task<DirectoryDto> GetDirectory(string id)
         {
-            return Task.FromResult(new DirectoryDto()
-            {
-                Id = Guid.NewGuid().ToString(),
-                Name = directoryName,
-                Directories = new List<DirectoryDto>(),
-                Files = new List<FileDto>(),
-                ParentDirectoryId = parentDirectoryId,
-                Size = 0
-            });
+            var result = await _directoriesClient.GetDirectory(id);
+            if (!result.Success)
+                throw new InvalidOperationException("GetDirectory call error");
+
+            return Mapper.Map(result.Directory);
         }
 
-        public Task Delete(string id)
+        public async Task<DirectoryDto> Create(string directoryName, string parentDirectoryId, string driveId)
         {
-            return Task.CompletedTask;
+            var result = await _directoriesClient.CreateDirectory(directoryName, parentDirectoryId);
+            if (!result.Success)
+                throw new InvalidOperationException("Create directory call error");
+
+            return Mapper.Map(result.Directory);
+        }
+
+        public async Task Delete(string id)
+        {
+            var result = await _directoriesClient.DeleteDirectory(id);
+            if (!result.Success)
+                throw new InvalidOperationException("Delete directory call error");
         }
     }
 }

@@ -39,6 +39,8 @@
     <BundleAssemblies>false</BundleAssemblies>
     <MandroidI18n />
     <Debugger>Xamarin</Debugger>
+    <AndroidTlsProvider>btls</AndroidTlsProvider>
+    <AndroidSupportedAbis />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

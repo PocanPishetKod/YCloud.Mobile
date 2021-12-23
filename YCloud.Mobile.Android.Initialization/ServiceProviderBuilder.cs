@@ -42,6 +42,11 @@ namespace YCloud.Mobile.Initialization
             services.AddSingleton<IFileRepository, FileRepository>();
             services.AddSingleton<Configuration>();
             services.AddSingleton<IAuthConfiguration, AuthConfiguration>();
+            services.AddSingleton<IYCloudConfiguration, YCloudConfiguration>();
+
+            var authState = new AuthenticationState();
+            services.AddSingleton<IAuthenticationState>(authState);
+            services.AddSingleton<IReadOnlyAuthenticationState>(authState);
         }
     }
 }

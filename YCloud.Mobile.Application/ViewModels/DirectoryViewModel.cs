@@ -49,6 +49,11 @@ namespace YCloud.Mobile.Application.ViewModels
         public async Task OnLoad()
         {
             await LoadDrive();
+            if (Drive == null)
+            {
+                await _navigationService.Navigate<NoHaveDriveViewModel>();
+                return;
+            }
             await LoadDirectory();
             FillDirectoryItems();
         }
@@ -107,6 +112,9 @@ namespace YCloud.Mobile.Application.ViewModels
 
         private async Task OpenFile(FileModel file)
         {
+            if (!file.IsImage)
+                return;
+
             var imageFiles = DirectoryItems.OfType<FileModel>()
                 .Where(f => f.IsImage)
                 .ToList();
@@ -155,7 +163,7 @@ namespace YCloud.Mobile.Application.ViewModels
 
             var loadedDrive = await _driveRepository.GetDrive(user.Id);
             if (loadedDrive == null)
-                throw new NullReferenceException($"Invalid load drive by userId = {user.Id}");
+                return;
 
             _driveDto = loadedDrive;
             Drive = DriveModel.Create(loadedDrive);

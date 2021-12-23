@@ -2,55 +2,64 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using YCloud.Client;
 using YCloud.Mobile.Application.Dto;
 using YCloud.Mobile.Application.Interfaces;
+using YCloud.Mobile.Common.Configuration;
+using YCloud.Mobile.Data.Serialization;
+using YCloud.Mobile.Data.Services;
 
 namespace YCloud.Mobile.Data.Repositories
 {
     public class FileRepository : IFileRepository
     {
-        private static int _currentImage = 1;
+        private readonly FilesClient _filesClient;
 
-        public Task<IReadOnlyCollection<FileDto>> UploadFiles(IReadOnlyCollection<ISelectedFile> selectedFiles, string directoryId, string driveId)
+        public FileRepository(IYCloudConfiguration yCloudConfiguration, IReadOnlyAuthenticationState authenticationState)
         {
-            IReadOnlyCollection<FileDto> result = selectedFiles.Select(f => new FileDto()
-            {
-                Id = Guid.NewGuid().ToString(),
-                DirectoryId = directoryId,
-                Name = f.Name,
-                Size = 1024
-            })
-                .ToList();
+            var httpClientHandler = new HttpClientHandler();
+            httpClientHandler.ServerCertificateCustomValidationCallback = (q, w, e, r) => true;
 
-            return Task.FromResult(result);
+            _filesClient = new FilesClient(new JsonSerialization(),
+                yCloudConfiguration.BaseUrl,
+                authenticationState.GetAccessToken(), httpClientHandler);
         }
 
-        public Task<Stream> DownloadFile(string fileId)
+        public async Task<IReadOnlyCollection<FileDto>> UploadFiles(IReadOnlyCollection<ISelectedFile> selectedFiles, string directoryId, string driveId)
         {
-            if (_currentImage == 1)
+            var result = new List<FileDto>();
+
+            foreach (var file in selectedFiles)
             {
-                _currentImage++;
-                return Task.FromResult(GetFileStream("itachi_1.png"));
+                using var fileStream = await file.OpenRead();
+                var processResult = await _filesClient.UploadFile(fileStream, file.Name, directoryId);
+                if (!processResult.Success)
+                    throw new InvalidOperationException("Upload file call error");
+
+                result.Add(Mapper.Map(processResult.File));
             }
-            else
-            {
-                _currentImage = 1;
-                return Task.FromResult(GetFileStream("itachi_2.png"));
-            }
+
+            return result;
         }
 
-        private Stream GetFileStream(string fileName)
+        public async Task<Stream> DownloadFile(string fileId)
         {
-            var assembly = IntrospectionExtensions.GetTypeInfo(typeof(FileRepository)).Assembly;
-            return assembly.GetManifestResourceStream($"YCloud.Mobile.Data.{fileName}");
+            var result = await _filesClient.DownloadFile(fileId);
+            if (!result.Success)
+                throw new InvalidOperationException("Download file call error");
+
+            return result.Stream;
         }
 
-        public Task Delete(string Id)
+        public async Task Delete(string Id)
         {
-            return Task.CompletedTask;
+            var result = await _filesClient.DeleteFile(Id);
+            if (!result.Success)
+                throw new InvalidOperationException("Delete file call error");
         }
     }
 }

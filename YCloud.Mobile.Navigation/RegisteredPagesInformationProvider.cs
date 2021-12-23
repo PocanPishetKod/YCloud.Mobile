@@ -4,6 +4,7 @@ using System.Text;
 using YCloud.Mobile.Application.ViewModels;
 using YCloud.Mobile.Pages.Directory;
 using YCloud.Mobile.Pages.Image;
+using YCloud.Mobile.Pages.NoHaveDrive;
 using YCloud.Mobile.Pages.SignIn;
 using YCloud.Mobile.Pages.SignUp;
 
@@ -20,7 +21,8 @@ namespace YCloud.Mobile.Navigation
             _pageTypes = new Dictionary<Type, Type>()
             {
                 { typeof(DirectoryViewModel), typeof(DirectoryPage) },
-                { typeof(ImagesViewModel), typeof(ImagesPage) }
+                { typeof(ImagesViewModel), typeof(ImagesPage) },
+                { typeof(NoHaveDriveViewModel), typeof(NoHaveDrivePage) }
             };
 
             _modalPageTypes = new Dictionary<Type, Type>()
@@ -45,7 +47,7 @@ namespace YCloud.Mobile.Navigation
                 pageTypes.Add(new ModalPageInfo(item.Value, item.Key));
             }
 
-            pageTypes.Add(new PageInfo(_rootPageType.Value, _rootPageType.Key));
+            pageTypes.Add(new PageInfo(_rootPageType.Value, _rootPageType.Key, true));
 
             return new RegisteredPagesInformation(pageTypes);
         }

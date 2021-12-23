@@ -7,19 +7,17 @@ namespace YCloud.Mobile.Application.Models
 {
     public class DirectoryModel : FileSystemElementModel
     {
-        public string ParentDirectoryId { get; }
-
         public override string IconUri => "directory.png";
 
-        private DirectoryModel(string id, string name, long size, string parentDirectoryId)
+        private DirectoryModel(string id, string name, long size)
             : base(id, name, size)
         {
-            ParentDirectoryId = parentDirectoryId;
+            
         }
 
         public static DirectoryModel Create(DirectoryDto directoryDto)
         {
-            return new DirectoryModel(directoryDto.Id, directoryDto.Name, directoryDto.Size, directoryDto.ParentDirectoryId);
+            return new DirectoryModel(directoryDto.Id, directoryDto.Name, directoryDto.Size);
         }
     }
 }
